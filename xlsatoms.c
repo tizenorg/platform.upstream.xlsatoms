@@ -25,8 +25,10 @@ in this Software without prior written authorization from The Open Group.
  *
  * Author:  Jim Fulton, MIT X Consortium
  */
+/* $XFree86: xc/programs/xlsatoms/xlsatoms.c,v 1.6 2001/12/14 20:02:08 dawes Exp $ */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <X11/Xos.h>
 #include <X11/Xlib.h>
 #include <X11/Xproto.h>
@@ -34,7 +36,15 @@ in this Software without prior written authorization from The Open Group.
 
 char *ProgramName;
 
-static void usage ()
+static void do_name ( Display *dpy, char *format, char *name );
+static int parse_range ( char *range, long *lowp, long *highp );
+static void do_range ( Display *dpy, char *format, char *range );
+static int catcher ( Display *dpy, XErrorEvent *err );
+static void list_atoms ( Display *dpy, char *format, int mask, 
+			 long low, long high );
+
+static void 
+usage(void)
 {
     fprintf (stderr, "usage:  %s [-options...]\n\n", ProgramName);
     fprintf (stderr, "where options include:\n");
@@ -50,10 +60,8 @@ static void usage ()
     exit (1);
 }
 
-
-main (argc, argv)
-    int argc;
-    char **argv;
+int
+main(int argc, char *argv[])
 {
     char *displayname = NULL;
     char *format = "%lu\t%s";
@@ -111,10 +119,8 @@ main (argc, argv)
     exit (0);
 }
 
-do_name (dpy, format, name)
-    Display *dpy;
-    char *format;
-    char *name;
+static void
+do_name(Display *dpy, char *format, char *name)
 {
     Atom a = XInternAtom (dpy, name, True);
 
@@ -131,9 +137,8 @@ do_name (dpy, format, name)
 #define RangeLow (1 << 0)
 #define RangeHigh (1 << 1)
 
-static int parse_range (range, lowp, highp)
-    char *range;
-    long *lowp, *highp;
+static int 
+parse_range(char *range, long *lowp, long *highp)
 {
     char *dash;
     int mask = 0;
@@ -167,10 +172,8 @@ static int parse_range (range, lowp, highp)
     return mask;
 }
 
-do_range (dpy, format, range)
-    Display *dpy;
-    char *format;
-    char *range;
+static void
+do_range(Display *dpy, char *format, char *range)
 {
     int mask;
     long low, high;
@@ -180,9 +183,8 @@ do_range (dpy, format, range)
 }
 
 
-static int catcher (dpy, err)
-    Display *dpy;
-    XErrorEvent *err;
+static int 
+catcher(Display *dpy, XErrorEvent *err)
 {
     if (err->request_code != X_GetAtomName) {
 	XmuPrintDefaultErrorMessage (dpy, err, stderr);
@@ -190,13 +192,10 @@ static int catcher (dpy, err)
     return 0;
 }
 
-list_atoms (dpy, format, mask, low, high)
-    Display *dpy;
-    char *format;
-    int mask;
-    long low, high;
+static void
+list_atoms(Display *dpy, char *format, int mask, long low, long high)
 {
-    int (*oldhandler)() = XSetErrorHandler (catcher);
+    XErrorHandler oldhandler = XSetErrorHandler (catcher);
 
     switch (mask) {
       case RangeHigh:
