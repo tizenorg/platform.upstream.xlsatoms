@@ -21,8 +21,8 @@
 
 bin_PROGRAMS = xlsatoms
 
-xlsatoms_CFLAGS = $(DEP_CFLAGS)
-xlsatoms_LDADD = $(DEP_LIBS)
+xlsatoms_CFLAGS = $(XLSATOMS_CFLAGS)
+xlsatoms_LDADD = $(XLSATOMS_LIBS)
 
 xlsatoms_SOURCES =	\
         xlsatoms.c
