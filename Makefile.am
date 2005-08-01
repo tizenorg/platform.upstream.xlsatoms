@@ -27,6 +27,6 @@ xlsatoms_LDADD = $(XLSATOMS_LIBS)
 xlsatoms_SOURCES =	\
         xlsatoms.c
 
-dist_man_MANS = \
+dist_man1_MANS = \
         xlsatoms.man
 
