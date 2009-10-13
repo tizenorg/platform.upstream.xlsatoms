@@ -21,7 +21,7 @@
 
 bin_PROGRAMS = xlsatoms
 
-xlsatoms_CFLAGS = $(XLSATOMS_CFLAGS)
+AM_CFLAGS = $(CWARNFLAGS) $(XLSATOMS_CFLAGS)
 xlsatoms_LDADD = $(XLSATOMS_LIBS)
 
 xlsatoms_SOURCES =	\
@@ -60,7 +60,7 @@ MAN_SUBSTS = \
 SUFFIXES = .$(APP_MAN_SUFFIX) .man
 
 .man.$(APP_MAN_SUFFIX):
-	sed $(MAN_SUBSTS) < $< > $@
+	$(AM_V_GEN)$(SED) $(MAN_SUBSTS) < $< > $@
 
 EXTRA_DIST += ChangeLog
 MAINTAINERCLEANFILES = ChangeLog
