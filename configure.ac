@@ -40,6 +40,5 @@ XORG_DEFAULT_OPTIONS
 
 # Checks for pkg-config packages
 PKG_CHECK_MODULES(XLSATOMS, xcb)
-AC_SUBST(XLSATOMS_LIBS)
 
 AC_OUTPUT([Makefile])
