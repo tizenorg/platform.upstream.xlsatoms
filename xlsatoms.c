@@ -49,17 +49,12 @@ static void list_atoms ( xcb_connection_t *c, const char *format, int mask,
 static void 
 usage(void)
 {
-    fprintf (stderr, "usage:  %s [-options...]\n\n", ProgramName);
-    fprintf (stderr, "where options include:\n");
-    fprintf (stderr,
-	     "    -display dpy            X server to which to connect\n");
-    fprintf (stderr,
-	     "    -format string          printf-style format to use\n");
-    fprintf (stderr,
-	     "    -range [num]-[num]      atom values to list\n");
-    fprintf (stderr,
+    fprintf (stderr, "usage:  %s [-options...]\n\n%s\n", ProgramName,
+	     "where options include:\n"
+	     "    -display dpy            X server to which to connect\n"
+	     "    -format string          printf-style format to use\n"
+	     "    -range [num]-[num]      atom values to list\n"
 	     "    -name string            name of single atom to print\n");
-    putc ('\n', stderr);
     exit (1);
 }
 
