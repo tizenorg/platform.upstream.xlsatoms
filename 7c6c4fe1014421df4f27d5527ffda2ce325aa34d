@@ -1,0 +1,8 @@
+Change-Id: I7c6c4fe1014421df4f27d5527ffda2ce325aa34d
+Code-Review+2: Ryan Ware <ware@linux.intel.com>
+Verified+1: Ryan Ware <ware@linux.intel.com>
+Submitted-by: Ryan Ware <ware@linux.intel.com>
+Submitted-at: Mon, 08 Jul 2013 10:07:57 -0700
+Reviewed-on: https://review.tizen.org/gerrit/4984
+Project: platform/upstream/xlsatoms
+Branch: refs/heads/tizen
