@@ -1,3 +1,5 @@
+%bcond_with x
+
 Name:           xlsatoms
 Version:        1.1.1
 Release:        0
@@ -10,6 +12,11 @@ Source1001: 	xlsatoms.manifest
 BuildRequires:  pkg-config
 BuildRequires:  pkgconfig(xcb)
 BuildRequires:  pkgconfig(xorg-macros) >= 1.3
+
+%if !%{with x}
+ExclusiveArch:
+%endif
+
 %description
 xlsatoms lists the interned atoms defined on an X11 server.
 
